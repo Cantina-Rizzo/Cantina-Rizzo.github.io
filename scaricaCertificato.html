@@ -441,8 +441,10 @@ if (window.CookieControl.isCookieAllowed("jimdo_analytics") || window.CookieCont
         pdf.setFontSize(42);
         pdf.setFontStyle('Lora');
         pdf.setTextColor(116,112,67);
-        // Aggiungi il nome e il cognome nella posizione desiderata
-        pdf.text(`${nome} ${cognome}`, 115, 90);
+    const nomeInMaiuscolo = nome.toUpperCase(); // Converti nome in maiuscolo
+    const cognomeInMaiuscolo = cognome.toUpperCase(); // Converti cognome in maiuscolo
+    pdf.text(`${nomeInMaiuscolo} ${cognomeInMaiuscolo}`, 115, 90);
+        // Aggiungi il nome e il cognome nella posizione desiderata        
         pdf.setFontSize(13);
         pdf.setFontStyle('Lora');
         pdf.setTextColor(75,75,75);
