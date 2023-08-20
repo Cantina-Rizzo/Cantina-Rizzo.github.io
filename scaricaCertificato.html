@@ -438,11 +438,11 @@ if (window.CookieControl.isCookieAllowed("jimdo_analytics") || window.CookieCont
     img.onload = function () {
         pdf.addImage(img, 'JPEG', 0, 0, 297, 210); // Imposta le dimensioni del PDF
 
-        pdf.setFontSize(25);
+        pdf.setFontSize(42);
         // Aggiungi il nome e il cognome nella posizione desiderata
         pdf.text(`${nome} ${cognome}`, 115, 90);
-        pdf.setFontSize(18);
-        pdf.text(`${num}` , 167, 108);
+        pdf.setFontSize(14);
+        pdf.text(`${num}` , 167, 110);
 
         // Salvataggio del PDF
         pdf.save("CertificatoZiPeppe.pdf");
