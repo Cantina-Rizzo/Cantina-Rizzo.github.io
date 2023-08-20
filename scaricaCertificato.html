@@ -12,15 +12,15 @@
 <meta name="description" content=""/>
 <meta name="robots" content="index, follow, archive"/>
 <meta property="st:section" content=""/>
-<meta name="twitter:title" content="Compila il modulo e scarica il Certificato"/>
+<meta name="twitter:title" content="Compila il modulo e scarica il certificato"/>
 <meta name="twitter:description" content="-"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta property="og:url" content="http://www.vitivinicolarizzo.it/certificato-digitale/"/>
-<meta property="og:title" content="Compila il modulo e scarica il Certificato"/>
+<meta property="og:title" content="Compila il modulo e scarica il certificato"/>
 <meta property="og:description" content=""/>
 <meta property="og:type" content="website"/>
 <meta property="og:locale" content="it_IT"/>
-<meta property="og:site_name" content="Cantina Rizzo"/><title>Compila il modulo e scarica il Certificato - Cantina Rizzo</title>
+<meta property="og:site_name" content="Cantina Rizzo"/><title>Compila il modulo e scarica il certificato - Cantina Rizzo</title>
 <link rel="shortcut icon" href="https://u.jimcdn.com/cms/o/sec964f84b3346276/img/favicon.png?t=1587398410"/>
     
 <link rel="canonical" href="https://www.vitivinicolarizzo.it/certificato-digitale/"/>
@@ -439,6 +439,7 @@ if (window.CookieControl.isCookieAllowed("jimdo_analytics") || window.CookieCont
         pdf.addImage(img, 'JPEG', 0, 0, 297, 210); // Imposta le dimensioni del PDF
 
         pdf.setFontSize(42);
+        pdf.setFontFace="Lora";
         // Aggiungi il nome e il cognome nella posizione desiderata
         pdf.text(`${nome} ${cognome}`, 115, 90);
         pdf.setFontSize(14);
