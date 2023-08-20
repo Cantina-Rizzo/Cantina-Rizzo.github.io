@@ -438,24 +438,13 @@ if (window.CookieControl.isCookieAllowed("jimdo_analytics") || window.CookieCont
     img.onload = function () {
         pdf.addImage(img, 'JPEG', 0, 0, 297, 210); // Imposta le dimensioni del PDF
 
-    const pdfWidth = pdf.internal.pageSize.getWidth();
-    const pdfHeight = pdf.internal.pageSize.getHeight();
-
-    pdf.setFontSize(42);
-    pdf.setFontStyle('Lora');
-    pdf.setTextColor(116, 112, 67);
-
-    const nomeInMaiuscolo = nome.toUpperCase();
-    const cognomeInMaiuscolo = cognome.toUpperCase();
-
-    const nomeCognome = `${nomeInMaiuscolo} ${cognomeInMaiuscolo}`;
-    const nomeCognomeWidth = pdf.getStringUnitWidth(nomeCognome) * 42;
-
-    // Posiziona il testo nome e cognome al centro orizzontalmente
-    const nomeCognomeX = (pdfWidth - nomeCognomeWidth) / 2;
-
-    pdf.text(nomeCognome, nomeCognomeX, pdfHeight / 2);
-        
+        pdf.setFontSize(42);
+        pdf.setFontStyle('Lora');
+        pdf.setTextColor(116,112,67);
+    const nomeInMaiuscolo = nome.toUpperCase(); // Converti nome in maiuscolo
+    const cognomeInMaiuscolo = cognome.toUpperCase(); // Converti cognome in maiuscolo
+    pdf.text(`${nomeInMaiuscolo} ${cognomeInMaiuscolo}`, 82, 95);
+        // Aggiungi il nome e il cognome nella posizione desiderata        
         pdf.setFontSize(13);
         pdf.setFontStyle('Lora');
         pdf.setTextColor(75,75,75);
