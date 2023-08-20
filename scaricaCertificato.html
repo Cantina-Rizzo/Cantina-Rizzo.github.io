@@ -438,13 +438,37 @@ if (window.CookieControl.isCookieAllowed("jimdo_analytics") || window.CookieCont
     img.onload = function () {
         pdf.addImage(img, 'JPEG', 0, 0, 297, 210); // Imposta le dimensioni del PDF
 
-        pdf.setFontSize(42);
-        pdf.setFontStyle('Lora');
-        pdf.setTextColor(116,112,67);
-    const nomeInMaiuscolo = nome.toUpperCase(); // Converti nome in maiuscolo
-    const cognomeInMaiuscolo = cognome.toUpperCase(); // Converti cognome in maiuscolo
-    pdf.text(`${nomeInMaiuscolo} ${cognomeInMaiuscolo}`, 82, 95);
-        // Aggiungi il nome e il cognome nella posizione desiderata        
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const pdfHeight = pdf.internal.pageSize.getHeight();
+
+    pdf.setFontSize(42);
+    pdf.setFontStyle('Lora');
+    pdf.setTextColor(116, 112, 67);
+
+    const nomeInMaiuscolo = nome.toUpperCase();
+    const cognomeInMaiuscolo = cognome.toUpperCase();
+
+    // Calcola la larghezza del testo e divide in righe se necessario
+    const nomeLines = pdf.splitTextToSize(nomeInMaiuscolo, pdfWidth - 130);
+    const cognomeLines = pdf.splitTextToSize(cognomeInMaiuscolo, pdfWidth - 130);
+
+    // Calcola l'altezza totale delle righe del nome e cognome
+    const totalLinesHeight = (nomeLines.length + cognomeLines.length) * 42;
+
+    // Calcola la posizione verticale in modo che il testo sia centrato verticalmente
+    const verticalPosition = (pdfHeight - totalLinesHeight) / 2;
+
+    // Stampa il testo in modo responsivo
+    let currentY = verticalPosition;
+    nomeLines.forEach(line => {
+        pdf.text(line, (pdfWidth - pdf.getStringUnitWidth(line) * 42) / 2, currentY);
+        currentY += 42;
+    });
+    
+    cognomeLines.forEach(line => {
+        pdf.text(line, (pdfWidth - pdf.getStringUnitWidth(line) * 42) / 2, currentY);
+        currentY += 42;
+    });      
         pdf.setFontSize(13);
         pdf.setFontStyle('Lora');
         pdf.setTextColor(75,75,75);
