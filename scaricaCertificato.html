@@ -448,27 +448,14 @@ if (window.CookieControl.isCookieAllowed("jimdo_analytics") || window.CookieCont
     const nomeInMaiuscolo = nome.toUpperCase();
     const cognomeInMaiuscolo = cognome.toUpperCase();
 
-    // Calcola la larghezza del testo e divide in righe se necessario
-    const nomeLines = pdf.splitTextToSize(nomeInMaiuscolo, pdfWidth - 130);
-    const cognomeLines = pdf.splitTextToSize(cognomeInMaiuscolo, pdfWidth - 130);
+    const nomeCognome = `${nomeInMaiuscolo} ${cognomeInMaiuscolo}`;
+    const nomeCognomeWidth = pdf.getStringUnitWidth(nomeCognome) * 42;
 
-    // Calcola l'altezza totale delle righe del nome e cognome
-    const totalLinesHeight = (nomeLines.length + cognomeLines.length) * 42;
+    // Posiziona il testo nome e cognome al centro orizzontalmente
+    const nomeCognomeX = (pdfWidth - nomeCognomeWidth) / 2;
 
-    // Calcola la posizione verticale in modo che il testo sia centrato verticalmente
-    const verticalPosition = (pdfHeight - totalLinesHeight) / 2;
-
-    // Stampa il testo in modo responsivo
-    let currentY = verticalPosition;
-    nomeLines.forEach(line => {
-        pdf.text(line, (pdfWidth - pdf.getStringUnitWidth(line) * 42) / 2, currentY);
-        currentY += 42;
-    });
-    
-    cognomeLines.forEach(line => {
-        pdf.text(line, (pdfWidth - pdf.getStringUnitWidth(line) * 42) / 2, currentY);
-        currentY += 42;
-    });      
+    pdf.text(nomeCognome, nomeCognomeX, pdfHeight / 2);
+        
         pdf.setFontSize(13);
         pdf.setFontStyle('Lora');
         pdf.setTextColor(75,75,75);
