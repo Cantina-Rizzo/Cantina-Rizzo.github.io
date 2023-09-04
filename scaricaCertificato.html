@@ -455,8 +455,8 @@ if (window.CookieControl.isCookieAllowed("jimdo_analytics") || window.CookieCont
     const startX = (pdf.internal.pageSize.getWidth() - totalWidth) / 2;
 
     // Aggiungi il nome e cognome sulla stessa riga
-    pdf.text(nomeInMaiuscolo, startX, 82); // L'altezza 100 è un esempio, puoi modificarla
-    pdf.text(cognomeInMaiuscolo, startX + nomeWidth, 82);
+    pdf.text(nomeInMaiuscolo, startX, 95);
+    pdf.text(cognomeInMaiuscolo, startX + nomeWidth, 95);
 
     pdf.setFontSize(13);
     pdf.setFontStyle('Lora');
