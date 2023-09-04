@@ -436,16 +436,12 @@ if (window.CookieControl.isCookieAllowed("jimdo_analytics") || window.CookieCont
     
     img.setAttribute('crossorigin', 'anonymous');
         
-    // Coordinate desiderate per il testo
-const xCoordinate = 82;
-const yCoordinate = 95;
-
-img.onload = function () {
+  img.onload = function () {
     pdf.addImage(img, 'JPEG', 0, 0, 297, 210);
 
     pdf.setFontSize(42);
     pdf.setFontStyle('Lora');
-    pdf.setTextColor(116,112,67);
+    pdf.setTextColor(116, 112, 67);
 
     const nomeInMaiuscolo = nome.toUpperCase();
     const cognomeInMaiuscolo = cognome.toUpperCase();
@@ -454,17 +450,17 @@ img.onload = function () {
     const nomeWidth = pdf.getStringUnitWidth(nomeInMaiuscolo) * 42;
     const cognomeWidth = pdf.getStringUnitWidth(cognomeInMaiuscolo) * 42;
 
-    // Calcola la posizione x in modo responsivo rispetto a xCoordinate
-    const nomeX = xCoordinate - nomeWidth / 2;
-    const cognomeX = xCoordinate - cognomeWidth / 2;
+    // Calcola la posizione x in modo responsivo per centrare il nome e il cognome
+    const totalWidth = nomeWidth + cognomeWidth; // Larghezza totale del nome e cognome
+    const startX = (pdf.internal.pageSize.getWidth() - totalWidth) / 2;
 
-    // Aggiungi il nome e cognome nella posizione calcolata
-    pdf.text(nomeInMaiuscolo, nomeX, yCoordinate);
-    pdf.text(cognomeInMaiuscolo, cognomeX, yCoordinate + 35); // Incrementa la coordinata y per separare il cognome
+    // Aggiungi il nome e cognome sulla stessa riga
+    pdf.text(nomeInMaiuscolo, startX, 82); // L'altezza 100 è un esempio, puoi modificarla
+    pdf.text(cognomeInMaiuscolo, startX + nomeWidth, 82);
 
     pdf.setFontSize(13);
     pdf.setFontStyle('Lora');
-    pdf.setTextColor(75,75,75);
+    pdf.setTextColor(75, 75, 75);
     pdf.text(`${num}`, 172, 111);
 
     pdf.save("CertificatoZiPeppe.pdf");
