@@ -435,37 +435,24 @@ if (window.CookieControl.isCookieAllowed("jimdo_analytics") || window.CookieCont
     img.src = "https://image.jimcdn.com/app/cms/image/transf/dimension=910x10000:format=jpg/path/sec964f84b3346276/image/ic17fb0da46078ca6/version/1692528182/image.jpg"; // Inserisci il percorso del tuo template
     
     img.setAttribute('crossorigin', 'anonymous');
-        
-  img.onload = function () {
-    pdf.addImage(img, 'JPEG', 0, 0, 297, 210);
+    img.onload = function () {
+        pdf.addImage(img, 'JPEG', 0, 0, 297, 210); // Imposta le dimensioni del PDF
 
-    pdf.setFontSize(42);
-    pdf.setFontStyle('Lora');
-    pdf.setTextColor(116, 112, 67);
+        pdf.setFontSize(42);
+        pdf.setFontStyle('Lora');
+        pdf.setTextColor(116,112,67);
+    const nomeInMaiuscolo = nome.toUpperCase(); // Converti nome in maiuscolo
+    const cognomeInMaiuscolo = cognome.toUpperCase(); // Converti cognome in maiuscolo
+    pdf.text(`${nomeInMaiuscolo} ${cognomeInMaiuscolo}`, 82, 95);
+        // Aggiungi il nome e il cognome nella posizione desiderata        
+        pdf.setFontSize(13);
+        pdf.setFontStyle('Lora');
+        pdf.setTextColor(75,75,75);
+        pdf.text(`${num}` , 172, 111);
 
-    const nomeInMaiuscolo = nome.toUpperCase();
-    const cognomeInMaiuscolo = cognome.toUpperCase();
-
-    // Calcola la larghezza del testo del nome e cognome
-    const nomeWidth = pdf.getStringUnitWidth(nomeInMaiuscolo) * 42;
-    const cognomeWidth = pdf.getStringUnitWidth(cognomeInMaiuscolo) * 42;
-
-    // Calcola la posizione x in modo responsivo per centrare il nome e il cognome
-    const totalWidth = nomeWidth + cognomeWidth; // Larghezza totale del nome e cognome
-    const startX = (pdf.internal.pageSize.getWidth() - totalWidth) / 2;
-
-    // Aggiungi il nome e cognome sulla stessa riga
-    pdf.text(nomeInMaiuscolo, startX, 95);
-    pdf.text(cognomeInMaiuscolo, startX + nomeWidth, 95);
-
-    pdf.setFontSize(13);
-    pdf.setFontStyle('Lora');
-    pdf.setTextColor(75, 75, 75);
-    pdf.text(`${num}`, 172, 111);
-
-    pdf.save("CertificatoZiPeppe.pdf");
-};
-        
+        // Salvataggio del PDF
+        pdf.save("CertificatoZiPeppe.pdf");
+    };
 });
 </script>
 
